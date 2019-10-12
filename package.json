@@ -4,13 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsc-watch --onSuccess \"node ./dist/server.js\""
+    "start": "set DEBUG=*:server && nodemon --exec ts-node -- ./server.ts",
+    "build": "tsc --build tsconfig.json"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "tsc-watch": "^4.0.0",
+    "express": "^4.17.1",
+    "pg": "^7.12.1"
+  },
+  "devDependencies": {
+    "@types/node": "^12.7.12",
+    "nodemon": "^1.19.3",
+    "ts-node": "^8.4.1",
     "typescript": "^3.6.4"
   }
 }
