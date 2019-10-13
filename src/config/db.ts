@@ -1,18 +1,14 @@
-import { envrionmentDetails } from "../interface";
+import { envrionmentDetails } from "../interfaces";
 
-export default {
-  development: {
-    envVariable: "DATABASE_URL_DEV",
+export const envDatabaseSettings = (env: string): envrionmentDetails => {
+  let config = {
+    envVariable: "",
     dialect: "postgres"
-  },
+  };
 
-  test: {
-    envVariable: "DATABASE_URL_TEST",
-    dialect: "postgres"
-  },
+  if (env === "development") config.envVariable = "DATABASE_URL_DEV";
+  else if (env === "test") config.envVariable = "DATABASE_URL_TEST";
+  else config.envVariable = "DATABASE_URL_PROD";
 
-  production: {
-    envVariable: "DATABASE_URL",
-    dialect: "postgres"
-  }
+  return config;
 };

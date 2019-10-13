@@ -1,15 +1,15 @@
 import { Pool } from "pg";
 import "dotenv/config";
 
-import { envrionmentDetails } from "../interface";
+import { envrionmentDetails } from "../interfaces";
 import { logger } from "../utils";
-import envConfigDb from "./db";
+import { envDatabaseSettings } from "./db";
 
 const env: string = process.env.NODE_ENV || "development";
+const envConfig: envrionmentDetails = envDatabaseSettings(env);
+const { envVariable } = envConfig;
 
-const t: envrionmentDetails = envConfigDb[env];
-const config = process.env[t.envVariable];
-
+const config = process.env[envVariable];
 const pool = new Pool({ connectionString: config });
 
 pool
