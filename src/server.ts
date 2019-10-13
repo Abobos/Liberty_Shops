@@ -1,13 +1,14 @@
 import http from "http";
+import { App } from "./app";
+import { logger } from "./utils";
 
-const { PORT = 3000 } = process.env;
-const server = http.createServer((req, res) => {
-  res.writeHead(200, {
-    "Content-type": "application/json"
-  });
-  res.end("Nice Time");
-});
+const expressApp = new App();
+
+const PORT = expressApp.getPort();
+const env = expressApp.getEnv();
+
+const server = http.createServer(expressApp.app);
 
 server.listen(PORT, () =>
-  console.log(`development:server`, `App started on PORT ${PORT}`)
+  logger(`${env}:server`, `App started on PORT ${PORT}`)
 );

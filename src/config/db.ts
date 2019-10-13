@@ -1,3 +1,5 @@
+import { envrionmentDetails } from "../interface";
+
 export default {
   development: {
     envVariable: "DATABASE_URL_DEV",
