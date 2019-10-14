@@ -1,4 +1,6 @@
-import express, { Application } from "express";
+import express, { Application, Request, Response, NextFunction } from "express";
+
+import indexRoute from "./routes";
 
 export class App {
   app: Application;
@@ -6,6 +8,8 @@ export class App {
   constructor(private port?: number) {
     this.app = express();
     this.settings();
+    this.middlewares();
+    this.routes();
   }
 
   settings() {
@@ -14,7 +18,9 @@ export class App {
 
   middlewares() {}
 
-  routes() {}
+  routes() {
+    this.app.use(indexRoute);
+  }
 
   getEnv() {
     return this.app.get("env");
