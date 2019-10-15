@@ -1,7 +1,7 @@
 import Model from "../models";
 import { InternalServerError } from "../exceptions";
 
-class propertyRepository {
+class UserRepository {
   public property: any;
 
   constructor() {
@@ -43,5 +43,4 @@ class propertyRepository {
   }
 }
 
-const t = new propertyRepository();
-t.findOne();
+export default new UserRepository();

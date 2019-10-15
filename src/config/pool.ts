@@ -17,7 +17,7 @@ pool
   .then(() => {
     logger(`${env}:database`, `connected to ${env} database`);
   })
-  .catch((e: string) => {
+  .catch((e: ErrorConstructor) => {
     logger(`${env}:database`, "something went wrong");
     process.exit(1);
   });
