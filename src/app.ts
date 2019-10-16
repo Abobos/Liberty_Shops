@@ -1,6 +1,7 @@
 import express, { Application } from "express";
 
 import indexRoute from "./routes";
+import { defaultErrorHandler } from "./middleware/error";
 
 export class App {
   app: Application;
@@ -9,17 +10,19 @@ export class App {
     this.app = express();
     this.settings();
     this.middlewares();
-    this.routes();
   }
 
   settings() {
     this.app.set("port", this.port || 3000 || process.env.PORT);
   }
 
-  middlewares() {}
+  middlewares() {
+    this.app.use(express.json());
+    this.app.use(express.urlencoded({ extended: false }));
 
-  routes() {
     this.app.use(indexRoute);
+
+    defaultErrorHandler(this.app);
   }
 
   getEnv() {

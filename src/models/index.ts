@@ -18,6 +18,7 @@ class Model {
                             VALUES (${queryDetails.values}) RETURNING *`;
 
     const { rows } = await db.query(queryStatement);
+
     return rows[0];
   }
 
@@ -26,6 +27,7 @@ class Model {
                             WHERE ${queryDetails.condition}`;
 
     const result = await db.query(queryStatement);
+
     return result.rows;
   }
 
@@ -35,6 +37,7 @@ class Model {
                             OFFSET ${queryDetails.offset} ORDER BY ${queryDetails.orderBy}`;
 
     const result = await db.query(queryStatement);
+
     return result;
   }
 
@@ -42,6 +45,7 @@ class Model {
     const queryStatement = `DELETE FROM ${this.resource} WHERE ${queryDetails.condition}`;
 
     const result = await db.query(queryStatement);
+
     return result;
   }
 
@@ -50,6 +54,7 @@ class Model {
                             WHERE ${queryDetails.condition} RETURNING ${queryDetails.column}`;
 
     const { rows } = await db.query(queryStatement);
+
     return rows[0];
   }
 }

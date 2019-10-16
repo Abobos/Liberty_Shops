@@ -1,31 +1,24 @@
-import { Router, Request, Response, NextFunction } from "express";
-import { InternalServerError } from "../exceptions";
-import { logger } from "../utils";
+import { Router, Request, Response } from "express";
+
+import authRoute from "./auth";
+
+import {
+  sendSuccessResponse,
+  sendErrorResponse
+} from "../modules/sendResponse";
 
 const router = Router();
 
-router.all("/*", (req: Request, res: Response) =>
-  res.status(404).send({
-    status: "error",
-    error: "This route is unavailable on this server"
+router.use("/api/v1/auth", authRoute);
+
+router.get("/", (req: Request, res: Response) =>
+  sendSuccessResponse(res, 200, {
+    message: "Welcome to Property Pro Lite REST API"
   })
 );
 
-router.use(
-  (
-    error: InternalServerError,
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => {
-    if (process.env.NODE_ENV !== "production")
-      logger(`Error:server`, error.stack);
-    res.status(error.statusCode);
-    res.send({
-      status: "error",
-      error: error.statusCode === 500 ? "Internal Server Error" : error.message
-    });
-  }
+router.all("/*", (req: Request, res: Response) =>
+  sendErrorResponse(res, 200, "This route is unavailable on this server")
 );
 
 export default router;

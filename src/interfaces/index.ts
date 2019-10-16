@@ -24,3 +24,7 @@ export interface queryParamsIV {
   condition: string;
   values: string;
 }
+
+export interface objectLiteral {
+  [props: string]: any;
+}
