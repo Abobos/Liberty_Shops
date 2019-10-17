@@ -1,19 +1,19 @@
 import Model from "../models";
+
 import { InternalServerError } from "../exceptions";
 
 class UserRepository {
-  public property: any;
+  public user: any;
 
   constructor() {
-    this.property = new Model("users");
+    this.user = new Model("users");
   }
 
-  async create() {
+  async create(column: string, values: string) {
     try {
-      const result = await this.property.create({
-        column: "first_name, last_name, email, password, phone_number, address",
-        values:
-          "'Blessing', 'Makaraba', 'blessingmakaraba@gmail.com', '898989898989', '08167672019', 'N0.9 10'"
+      const result = await this.user.create({
+        column,
+        values
       });
       return result;
     } catch (e) {
@@ -21,11 +21,11 @@ class UserRepository {
     }
   }
 
-  async findOne() {
+  async findOne(column: string, condition: string) {
     try {
-      const result = await this.property.selectOne({
-        column: "*",
-        condition: "id = 1"
+      const result = await this.user.selectOne({
+        column,
+        condition
       });
       return result;
     } catch (e) {
@@ -35,7 +35,7 @@ class UserRepository {
 
   async findAll() {
     try {
-      const result = await this.property.findAll({});
+      const result = await this.user.findAll({});
       return result;
     } catch (e) {
       throw new InternalServerError(e);

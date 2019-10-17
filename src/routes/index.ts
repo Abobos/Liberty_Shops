@@ -18,7 +18,7 @@ router.get("/", (req: Request, res: Response) =>
 );
 
 router.all("/*", (req: Request, res: Response) =>
-  sendErrorResponse(res, 200, "This route is unavailable on this server")
+  sendErrorResponse(res, 200, "This route is unavailable on the server")
 );
 
 export default router;

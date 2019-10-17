@@ -5,8 +5,9 @@ const users = `
   DROP TABLE IF EXISTS users CASCADE;
   CREATE TABLE users(
     id SERIAL PRIMARY KEY,
-    full_name VARCHAR(128) NOT NULL,
+    name VARCHAR(128) NOT NULL,
     email VARCHAR(60) NOT NULL,
+    password VARCHAR(60) NOT NULL,
     address VARCHAR(128) NOT NULL,
     phone_number VARCHAR(20) NOT NULL,
     is_admin BOOLEAN NOT NULL DEFAULT false

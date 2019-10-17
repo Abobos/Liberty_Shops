@@ -1,10 +1,10 @@
 import express, { Application } from "express";
 
 import indexRoute from "./routes";
-import { defaultErrorHandler } from "./middleware/error";
+import { defaultErrorHandler } from "./middlewares/error";
 
 export class App {
-  app: Application;
+  public app: Application;
 
   constructor(private port?: number) {
     this.app = express();

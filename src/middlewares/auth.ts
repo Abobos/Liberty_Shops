@@ -4,17 +4,33 @@ import {
   validateAgainstRegex,
   emailRegex,
   passwordRegex,
-  errorChecker
+  errorChecker,
+  nameRegex,
+  addressRegex,
+  phoneNumberRegex
 } from "../modules/validator";
 import { sendErrorResponse } from "../modules/sendResponse";
 
 class Auth {
   static signup(req: Request, res: Response, next: NextFunction) {
-    const { email, password } = req.body;
+    const {
+      name,
+      email,
+      password,
+      address,
+      phone_number: phoneNumber
+    } = req.body;
 
     const schema = {
+      name: validateAgainstRegex(name, nameRegex, "name"),
       email: validateAgainstRegex(email, emailRegex, "email"),
-      password: validateAgainstRegex(password, passwordRegex, "password")
+      password: validateAgainstRegex(password, passwordRegex, "password"),
+      address: validateAgainstRegex(address, addressRegex, "address"),
+      phone_number: validateAgainstRegex(
+        phoneNumber,
+        phoneNumberRegex,
+        "phonenumber"
+      )
     };
 
     const errors = errorChecker(schema);

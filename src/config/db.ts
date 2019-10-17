@@ -6,9 +6,11 @@ export const envDatabaseSettings = (env: string): envrionmentDetails => {
     dialect: "postgres"
   };
 
-  if (env === "development") config.envVariable = "DATABASE_URL_DEV";
-  else if (env === "test") config.envVariable = "DATABASE_URL_TEST";
-  else config.envVariable = "DATABASE_URL_PROD";
+  env === "development"
+    ? (config.envVariable = "DATABASE_URL_DEV")
+    : env === "test"
+    ? (config.envVariable = "DATABASE_URL_TEST")
+    : (config.envVariable = "DATABASE_URL_PROD");
 
   return config;
 };

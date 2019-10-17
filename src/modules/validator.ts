@@ -1,72 +1,65 @@
-// import { objectLiteral } from "../interfaces";
+import { objectLiteral } from "../interfaces";
 
-// export const emailRegex = /^[A-Za-z0-9.-_]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
-// export const passwordRegex = /[a-ZA-Z0-9]/;
-// export const name = /^[A-Za-z]+\s([A-Za-z]+\s)?[A-Za-z]+$/;
+export const emailRegex = /^[A-Za-z0-9.-_]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
 
-// export const magicTrimmer = (payload: objectLiteral) => {
-//   const data = {};
+export const passwordRegex = /^[]{8,}/;
 
-//   Object.keys(payload).forEach(key => {
-//     const value: any = payload[key];
-//     Object.assign(data, { [key]: value.trim() });
-//   });
+export const nameRegex = /^[A-Za-z]+\s([A-Za-z]+\s)?[A-Za-z]+$/;
 
-//   return data;
-// };
+export const addressRegex = /./;
 
-// export const validateAgainstRegex = (
-//   value: string,
-//   regex: RegExp,
-//   regexType: string
-// ) => {
-//   let errorMessage: string = "";
+export const phoneNumberRegex = /[\d]/;
 
-//   if (!value) return null;
+export const magicTrimmer = (payload: objectLiteral): objectLiteral => {
+  const data = {};
 
-//   switch (regexType) {
-//     case "password":
-//       errorMessage =
-//         "password length should be at least eight characters password must contain at least one Uppercase letter, one lowercase letter, and a digit";
-//       break;
+  Object.keys(payload).forEach(key => {
+    const value: any = payload[key];
+    Object.assign(data, { [key]: value.trim() });
+  });
 
-//     case "name":
-//       errorMessage = "name is not valid";
-//       break;
+  return data;
+};
 
-//     case "email":
-//       errorMessage = "email is not valid";
-//       break;
+export const validateAgainstRegex = (
+  value: string,
+  regex: RegExp,
+  regexType: string
+): string | undefined | null => {
+  let errorMessage: string = "";
 
-//     default:
-//       break;
-//   }
+  if (!value) return null;
 
-//   if (!regex.test(value)) return errorMessage;
+  switch (regexType) {
+    case "password":
+      errorMessage =
+        "password length should be at least eight characters\n password must contain at least one Uppercase letter, one lowercase letter, and a digit";
+      break;
 
-//   return undefined;
-// };
+    default:
+      errorMessage = `${regexType} is not valid`;
+      break;
+  }
 
-// export const errorChecker = (obj: objectLiteral) => {
-//   const result: any = {};
+  if (!regex.test(value)) return errorMessage;
 
-//   Object.keys(obj).forEach(key => {
-//     if (obj[key]) {
-//       result[key] = obj[key];
-//     }
+  return undefined;
+};
 
-//     if (obj[key] === null) {
-//       result[key] = `${key} is required`;
-//     }
-//   });
+export const errorChecker = (payload: objectLiteral): string[] | null => {
+  const result: any = {};
 
-//   if (Object.keys(result).length) {
-//     return Object.values(result);
-//   }
+  Object.keys(payload).forEach(key => {
+    if (payload[key]) {
+      result[key] = payload[key];
+    } else if (payload[key] === null) {
+      result[key] = `${key} is required`;
+    }
+  });
 
-//   return null;
-// };
+  if (Object.keys(result).length) {
+    return Object.values(result);
+  }
 
-const passwordRegex = /[a-zA-Z0-9]+/;
-
-if (passwordRegex.test("home")) console.log("jkjk");
+  return null;
+};
