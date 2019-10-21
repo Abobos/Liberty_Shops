@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from "express";
 import UserRepository from "../repositories/user";
 
 import { sendSuccessResponse } from "../modules/sendResponse";
-import { createToken, hashPassword } from "../utils/index";
+import { createToken, hashPassword } from "../utils";
 import { ConflictError } from "../exceptions";
 
 class AuthController {
@@ -31,7 +31,7 @@ class AuthController {
         createToken({
           id: createdUser.id,
           name: createdUser.name,
-          email: createdUser.Email,
+          email: createdUser.email,
           is_admin: createdUser.is_admin
         })
       );

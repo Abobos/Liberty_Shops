@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "db:migrate": "set DEBUG=*:database && ts-node -- ./src/migration/schema.ts",
+    "db:migrate": "set DEBUG=*:database && ts-node -- ./src/migration/tables.ts",
     "start": "set DEBUG=*:server && nodemon --exec ts-node -- ./src/server.ts",
     "build": "tsc --build tsconfig.json"
   },

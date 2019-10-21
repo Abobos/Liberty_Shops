@@ -30,7 +30,9 @@ DROP TABLE IF EXISTS carts CASCADE;
 CREATE TABLE carts(
   id SERIAL PRIMARY KEY,
   property_id INT NOT NULL,
-  FOREIGN KEY (property_id) REFERENCES "properties" (id) ON UPDATE CASCADE ON DELETE CASCADE
+  owner INT NOT NULL,
+  FOREIGN KEY (property_id) REFERENCES "properties" (id) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (owner) REFERENCES "users" (id) ON UPDATE CASCADE ON DELETE CASCADE
 );`;
 
 const orders = `
@@ -38,6 +40,9 @@ DROP TABLE IF EXISTS orders CASCADE;
 CREATE TABLE orders(
   id SERIAL PRIMARY KEY,
   property_id INT NOT NULL,
+  address VARCHAR(128) NOT NULL,
+  date_of_delivery TIMESTAMP NOT NULL,
+  created_an TIMESTAMP NOT NULL DEFAULT NOW(),
   FOREIGN KEY (property_id) REFERENCES "properties" (id) ON UPDATE CASCADE ON DELETE CASCADE
 );`;
 
@@ -47,5 +52,6 @@ CREATE TABLE orders(
     logger("migration:database", "Table created");
   } catch (e) {
     logger("migration-error:database", `${e}: Table not created`);
+    process.exit(1);
   }
 })();

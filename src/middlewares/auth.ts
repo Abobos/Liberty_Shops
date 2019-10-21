@@ -1,25 +1,28 @@
 import { Request, Response, NextFunction } from "express";
 
 import {
-  validateAgainstRegex,
   emailRegex,
   passwordRegex,
-  errorChecker,
   nameRegex,
   addressRegex,
-  phoneNumberRegex
+  phoneNumberRegex,
+  validateAgainstRegex,
+  errorChecker,
+  magicTrimmer
 } from "../modules/validator";
 import { sendErrorResponse } from "../modules/sendResponse";
 
 class Auth {
   static signup(req: Request, res: Response, next: NextFunction) {
+    const userData = magicTrimmer(req.body);
+
     const {
       name,
       email,
       password,
       address,
       phone_number: phoneNumber
-    } = req.body;
+    } = userData;
 
     const schema = {
       name: validateAgainstRegex(name, nameRegex, "name"),
