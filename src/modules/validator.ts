@@ -1,10 +1,14 @@
 import { objectLiteral } from "../interfaces";
 
 export const emailRegex = /^[A-Za-z0-9.-_]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
-export const passwordRegex = /^$/;
+
+export const passwordRegex = /(?=^.{8,}$)(?=.*[a-z].*)(?=.*[A-Z].*)(?=.*[0-9].*)/;
+
 export const nameRegex = /^[A-Za-z]+\s([A-Za-z]+\s)?[A-Za-z]+$/;
+
 export const addressRegex = /./;
-export const phoneNumberRegex = /[\d]/;
+
+export const phoneNumberRegex = /[\d]{11,}/;
 
 export const magicTrimmer = (payload: objectLiteral): objectLiteral => {
   const data = {};
@@ -29,7 +33,12 @@ export const validateAgainstRegex = (
   switch (regexType) {
     case "password": {
       errorMessage =
-        "password length should be at least eight characters\n password must contain at least one Uppercase letter, one lowercase letter, and a digit";
+        "password must contain at least eight characters, one Uppercase letter, one lowercase letter, and one digit";
+      break;
+    }
+
+    case "phone_number": {
+      errorMessage = "phone number is not valid";
       break;
     }
 
@@ -55,9 +64,5 @@ export const errorChecker = (payload: objectLiteral): string[] | null => {
     }
   });
 
-  if (Object.keys(result).length) {
-    return Object.values(result);
-  }
-
-  return null;
+  return Object.keys(result).length ? result : null;
 };

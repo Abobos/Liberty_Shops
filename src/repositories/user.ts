@@ -27,7 +27,7 @@ class UserRepository {
         column,
         condition
       });
-      return result;
+      return result[0];
     } catch (e) {
       throw new InternalServerError(e);
     }

@@ -25,7 +25,6 @@ class Model {
   async selectOne(queryDetails: queryParamsI): Promise<any> {
     const queryStatement = `SELECT ${queryDetails.column} FROM ${this.resource}
                             WHERE ${queryDetails.condition}`;
-
     const result = await db.query(queryStatement);
 
     return result.rows;
