@@ -6,7 +6,7 @@ import {
   queryParamsIV
 } from "../interfaces";
 
-class Model {
+class UniversalModel {
   private resource: string;
 
   constructor(table: string) {
@@ -58,4 +58,4 @@ class Model {
   }
 }
 
-export default Model;
+export default UniversalModel;
