@@ -1,9 +1,10 @@
-import { Request, Response, NextFunction } from "express";
+ import { Request, Response, NextFunction } from "express";
 
 import UserRepository from "../repositories/user";
 
 import { sendSuccessResponse } from "../modules/sendResponse";
 import { createToken, hashPassword, comparePassword } from "../utils";
+
 import { ConflictError, AuthenticationError } from "../exceptions";
 
 class AuthController {
@@ -71,6 +72,7 @@ class AuthController {
         throw new AuthenticationError("Invalid credentials");
 
       const { id, name, email, is_admin: isAdmin } = existingUser;
+
 
       return sendSuccessResponse(
         res,
