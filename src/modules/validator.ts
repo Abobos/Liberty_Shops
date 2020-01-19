@@ -1,19 +1,19 @@
 import { objectLiteral } from "../interfaces";
 
-export const emailRegex = /^[A-Za-z0-9.-_]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
+export const emailRegex: RegExp = /^[A-Za-z0-9.-_]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
 
-export const passwordRegex = /(?=^.{8,}$)(?=.*[a-z].*)(?=.*[A-Z].*)(?=.*[0-9].*)/;
+export const passwordRegex: RegExp = /(?=^.{8,}$)(?=.*[a-z].*)(?=.*[A-Z].*)(?=.*[0-9].*)/;
 
-export const nameRegex = /^[A-Za-z]+\s([A-Za-z]+\s)?[A-Za-z]+$/;
+export const nameRegex: RegExp = /^[A-Za-z]+\s([A-Za-z]+\s)?[A-Za-z]+$/;
 
-export const addressRegex = /./;
+export const addressRegex: RegExp = /./;
 
-export const phoneNumberRegex = /[\d]{11,}/;
+export const phoneNumberRegex: RegExp = /[\d]{11,}/;
 
 export const magicTrimmer = (payload: objectLiteral): objectLiteral => {
   const data = {};
 
-  Object.keys(payload).forEach(key => {
+  Object.keys(payload).forEach((key) => {
     const value: any = payload[key];
     Object.assign(data, { [key]: value.trim() });
   });
@@ -56,7 +56,7 @@ export const validateAgainstRegex = (
 export const errorChecker = (payload: objectLiteral): string[] | null => {
   const result: any = {};
 
-  Object.keys(payload).forEach(key => {
+  Object.keys(payload).forEach((key) => {
     if (payload[key]) {
       result[key] = payload[key];
     } else if (payload[key] === null) {
