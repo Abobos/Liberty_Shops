@@ -1,7 +1,7 @@
 import express, { Application } from "express";
 
-import indexRoute from "./routes";
-import { defaultErrorHandler } from "./middlewares/error";
+import indexRoute from "@routes/index";
+import { defaultErrorHandler } from "@middlewares/error";
 
 export class App {
   public app: Application;

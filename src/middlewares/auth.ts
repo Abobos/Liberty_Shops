@@ -8,9 +8,9 @@ import {
   phoneNumberRegex,
   validateAgainstRegex,
   errorChecker,
-  magicTrimmer
-} from "../modules/validator";
-import { sendErrorResponse } from "../modules/sendResponse";
+  magicTrimmer,
+} from "@modules/validator";
+import { sendErrorResponse } from "@modules/sendResponse";
 
 export const validator = (req: Request, res: Response, next: NextFunction) => {
   const userData = magicTrimmer(req.body);
@@ -20,7 +20,7 @@ export const validator = (req: Request, res: Response, next: NextFunction) => {
     email,
     password,
     address,
-    phone_number: phoneNumber
+    phone_number: phoneNumber,
   } = userData;
 
   let schema;
@@ -34,12 +34,12 @@ export const validator = (req: Request, res: Response, next: NextFunction) => {
       phoneNumber,
       phoneNumberRegex,
       "phone_number"
-    )
+    ),
   };
 
   const signinSchema = {
     email: validateAgainstRegex(email, emailRegex, "email"),
-    password: validateAgainstRegex(password, passwordRegex, "password")
+    password: validateAgainstRegex(password, passwordRegex, "password"),
   };
 
   req.route.path === "/signup"

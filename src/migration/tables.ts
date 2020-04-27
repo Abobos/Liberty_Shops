@@ -45,13 +45,11 @@ CREATE TABLE orders(
   FOREIGN KEY (owner) REFERENCES "users" (id) ON UPDATE CASCADE ON DELETE CASCADE
 );`;
 
-
-
 (async function migrate() {
   try {
     await db.query(`${users} ${products} ${carts} ${orders}`);
-    await db.query('DROP TABLE properties')
     logger("migration:database", "Table created");
+    process.exit();
   } catch (e) {
     logger("migration-error:database", `${e}: Table not created`);
     process.exit(1);
