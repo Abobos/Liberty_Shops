@@ -16,8 +16,8 @@
     "@utils": "build/utils"
   },
   "scripts": {
-    "db:migrate": "set DEBUG=*:database && ts-node -- src/migration/tables.ts",
-    "start": "set DEBUG=*:server && nodemon --exec ts-node -- src/server.ts",
+    "db:migrate": "ts-node -- src/migration/tables.ts",
+    "start": "nodemon --exec ts-node -- src/server.ts",
     "build": "tsc --build tsconfig.json"
   },
   "keywords": [],
@@ -31,7 +31,8 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "module-alias": "^2.2.2",
-    "pg": "^7.12.1"
+    "pg": "^7.12.1",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",

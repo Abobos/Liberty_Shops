@@ -48,10 +48,10 @@ CREATE TABLE orders(
 (async function migrate() {
   try {
     await db.query(`${users} ${products} ${carts} ${orders}`);
-    logger("migration:database", "Table created");
+    logger.info("migration:database Table created");
     process.exit();
   } catch (e) {
-    logger("migration-error:database", `${e}: Table not created`);
+    logger.error(`migration-error:database ${e}: Table not created`);
     process.exit(1);
   }
 })();
