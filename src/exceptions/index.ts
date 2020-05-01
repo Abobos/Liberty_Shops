@@ -1,4 +1,4 @@
-import { objectLiteral } from "src/interfaces";
+import { objectLiteral } from "../interfaces";
 
 const setPrototypeOf = (payload: objectLiteral, parent: InternalServerError) =>
   Object.setPrototypeOf(payload, parent);

@@ -1,9 +1,10 @@
 import Model from "../models";
 
 import { InternalServerError } from "../exceptions";
+import { logger } from "../utils";
 
 class UserRepository {
-  public user: any;
+  public user: Model;
 
   constructor() {
     this.user = new Model("users");
@@ -11,9 +12,9 @@ class UserRepository {
 
   async create(column: string, values: string) {
     try {
-      const result = await this.user.create({
+      const result = await this.user.insert({
         column,
-        values
+        values,
       });
       return result;
     } catch (e) {
@@ -23,9 +24,9 @@ class UserRepository {
 
   async findOne(column: string, condition: string) {
     try {
-      const result = await this.user.selectOne({
+      const result = await this.user.select({
         column,
-        condition
+        condition,
       });
       return result[0];
     } catch (e) {
@@ -33,9 +34,12 @@ class UserRepository {
     }
   }
 
-  async findAll() {
+  async findAll(column: string, condition: string) {
     try {
-      const result = await this.user.findAll({});
+      const result = await this.user.select({
+        column,
+        condition,
+      });
       return result;
     } catch (e) {
       throw new InternalServerError(e);

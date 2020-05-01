@@ -3,7 +3,7 @@ import { envrionmentDetails } from "../interfaces";
 export const envDatabaseSettings = (env: string): envrionmentDetails => {
   let config = {
     envVariable: "",
-    dialect: "postgres"
+    dialect: "postgres",
   };
 
   env === "development"

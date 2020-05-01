@@ -1,8 +1,8 @@
  import { Request, Response, NextFunction } from "express";
 
-import UserRepository from "../repositories/user";
+import UserRepository from "@repositories/user";
 
-import { sendSuccessResponse } from "../modules/sendResponse";
+import { sendSuccessResponse } from "@modules/sendResponse";
 import { createToken, hashPassword, comparePassword } from "../utils";
 
 import { ConflictError, AuthenticationError } from "../exceptions";

@@ -16,7 +16,7 @@ export interface queryParamsII {
 export interface queryParamsIII extends queryParamsI {
   limit?: string;
   offset?: string;
-  orderBy: string;
+  orderBy?: string;
 }
 
 export interface queryParamsIV {

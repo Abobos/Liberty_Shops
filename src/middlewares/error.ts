@@ -12,12 +12,12 @@ export const defaultErrorHandler = (app: Application) =>
       next: NextFunction
     ) => {
       process.env.NODE_ENV !== "production" &&
-        (error.statusCode === 500 && logger(`Error:server`, error.stack));
+        logger.error(`${error.name}: ${error.message} \n ${error.stack}`);
 
       res.status(error.statusCode).send({
         status: "error",
         error:
-          error.statusCode === 500 ? "Internal Server Error" : error.message
+          error.statusCode === 500 ? "Internal Server Error" : error.message,
       });
     }
   );
