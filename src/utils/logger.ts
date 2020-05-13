@@ -1,21 +1,35 @@
-import winston from "winston";
+import winston, { format, info } from "winston";
+
+const { combine, printf } = format;
+
+const formatOptions = {
+  format: combine(
+    process.env.NODE_ENV !== "production" ? format.simple() : format.json(),
+
+    printf((info) => {
+      const today = new Date();
+      const timestamp = `${
+        today.toISOString().split("T")[0]
+      } ${today.toLocaleTimeString()}`;
+      return `${timestamp} ${info.level}: ${info.message}`;
+    })
+  ),
+};
 
 const logger = winston.createLogger({
-  level: "info",
-  format: winston.format.json(),
-  defaultMeta: { service: "user-service" },
+  ...formatOptions,
   transports: [
     new winston.transports.File({ filename: "error.log", level: "error" }),
-    new winston.transports.File({ filename: "combined.log" }),
+    new winston.transports.Console({ level: "info" }),
   ],
 });
 
-if (process.env.NODE_ENV !== "production") {
+process.env.NODE_ENV !== "production" &&
   logger.add(
     new winston.transports.Console({
-      format: winston.format.simple(),
+      ...formatOptions,
+      level: "error",
     })
   );
-}
 
 export default logger;

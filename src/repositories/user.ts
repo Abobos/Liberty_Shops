@@ -1,7 +1,6 @@
 import Model from "../models";
 
 import { InternalServerError } from "../exceptions";
-import { logger } from "../utils";
 
 class UserRepository {
   public user: Model;
@@ -18,7 +17,7 @@ class UserRepository {
       });
       return result;
     } catch (e) {
-      throw new InternalServerError(e);
+      throw e;
     }
   }
 
@@ -28,9 +27,10 @@ class UserRepository {
         column,
         condition,
       });
-      return result[0];
+
+      return result.rows[0];
     } catch (e) {
-      throw new InternalServerError(e);
+      throw e;
     }
   }
 
@@ -42,7 +42,7 @@ class UserRepository {
       });
       return result;
     } catch (e) {
-      throw new InternalServerError(e);
+      throw e;
     }
   }
 }

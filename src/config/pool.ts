@@ -15,10 +15,10 @@ const pool = new Pool({ connectionString: config });
 pool
   .connect()
   .then(() => {
-    logger.info(`${env}:database connected to ${env} database`);
+    logger.info(`connected to ${env} database`);
   })
   .catch((e: ErrorConstructor) => {
-    logger.error(`${env}:database something went wrong`);
+    logger.error(`something went wrong when connecting to ${env} database`);
     process.exit(1);
   });
 

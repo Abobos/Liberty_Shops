@@ -17,6 +17,7 @@ class UniversalModel {
   async insert(queryDetails: queryParamsII): Promise<any> {
     const queryStatement = `INSERT INTO ${this.resource} (${queryDetails.column}) 
                             VALUES (${queryDetails.values}) RETURNING *`;
+    logger.info(queryStatement);
 
     const { rows } = await db.query(queryStatement);
 
@@ -25,12 +26,8 @@ class UniversalModel {
 
   async select(queryDetails: queryParamsIII): Promise<any> {
     const queryStatement = `SELECT ${queryDetails.column} FROM ${this.resource}
-                            WHERE ${queryDetails.condition} LIMIT ${
-      queryDetails.limit
-    } 
-                            OFFSET ${queryDetails.offset} ORDER BY ${
-      queryDetails.orderBy || "ASC"
-    }`;
+                            WHERE ${queryDetails.condition}`;
+    logger.info(queryStatement);
 
     const result = await db.query(queryStatement);
 
@@ -39,6 +36,7 @@ class UniversalModel {
 
   async delete(queryDetails: queryParamsI): Promise<any> {
     const queryStatement = `DELETE FROM ${this.resource} WHERE ${queryDetails.condition}`;
+    logger.info(queryStatement);
 
     const result = await db.query(queryStatement);
 
@@ -48,6 +46,7 @@ class UniversalModel {
   async update(queryDetails: queryParamsIV): Promise<any> {
     const queryStatement = `UPDATE ${this.resource} SET ${queryDetails.values} 
                             WHERE ${queryDetails.condition} RETURNING ${queryDetails.column}`;
+    logger.info(queryStatement);
 
     const { rows } = await db.query(queryStatement);
 
