@@ -1,9 +1,9 @@
- import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from "express";
 
-import UserRepository from "../repositories/user";
+import UserRepository from "@repositories/user";
 
-import { sendSuccessResponse } from "../modules/sendResponse";
-import { createToken, hashPassword, comparePassword } from "../utils";
+import { sendSuccessResponse } from "@modules/sendResponse";
+import { createToken, hashPassword, comparePassword, logger } from "../utils";
 
 import { ConflictError, AuthenticationError } from "../exceptions";
 
@@ -15,7 +15,7 @@ class AuthController {
         email: userEmail,
         password: userPassword,
         phone_number: userPhoneNumber,
-        address: userAddress
+        address: userAddress,
       } = req.body;
 
       const selectedColumns = "*";
@@ -34,7 +34,7 @@ class AuthController {
         id,
         name,
         email,
-        is_admin: isAdmin
+        is_admin: isAdmin,
       } = await UserRepository.create(column, values);
 
       return sendSuccessResponse(
@@ -44,7 +44,7 @@ class AuthController {
           id,
           name,
           email,
-          is_admin: isAdmin
+          is_admin: isAdmin,
         })
       );
     } catch (err) {
@@ -73,7 +73,6 @@ class AuthController {
 
       const { id, name, email, is_admin: isAdmin } = existingUser;
 
-
       return sendSuccessResponse(
         res,
         201,
@@ -81,7 +80,7 @@ class AuthController {
           id,
           name,
           email,
-          is_admin: isAdmin
+          is_admin: isAdmin,
         })
       );
     } catch (err) {

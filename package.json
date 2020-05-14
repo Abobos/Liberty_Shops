@@ -4,16 +4,17 @@
   "description": "",
   "main": "index.js",
   "_moduleAliases": {
-    "@modules": "build/modules",
-    "@exceptions": "build/exceptions",
-    "@controllers": "build/controllers",
-    "@interfaces": "build/interfaces",
-    "@middlewares": "build/middlewares",
-    "@models": "build/models",
-    "@routes": "build/routes",
-    "@services": "build/services",
-    "@repositories": "build/repositories",
-    "@utils": "build/utils"
+    "@modules": "src/modules",
+    "@exceptions": "src/exceptions",
+    "@controllers": "src/controllers",
+    "@interfaces": "src/interfaces",
+    "@middlewares": "src/middlewares",
+    "@models": "src/models",
+    "@routes": "src/routes",
+    "@services": "src/services",
+    "@repositories": "src/repositories",
+    "@utils": "src/utils",
+    "@config": "src/config"
   },
   "scripts": {
     "db:migrate": "ts-node -- src/migration/tables.ts",
